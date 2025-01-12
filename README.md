@@ -65,18 +65,25 @@ The classifier works in the following steps:
    - The prior probability of a message being spam or non-spam is computed based on the proportions of each class in the dataset.
 
 5. **Prediction**:
-   - Given a set of cleaned email messages, the model will classify each message as spam or non-spam by calculating the likelihoods and comparing them.
+   - Given a set of cleaned email messages, the model will classify each message as spam or non-spam by calculating the likelihoods and comparing them using their posterior probability.
 
 ## Key Concepts in the Model
 
 - **Laplace Smoothing**: 
-   - Used to handle the problem of zero probabilities. It ensures that no word has a zero probability, even if it is not present in the training data.
-   
+   - Used to handle the problem of zero probabilities. It ensures that no word has a zero probability, even if it is not present in the training data. This is particularly useful in text classification tasks where many words might not appear in the training dataset but still need to be handled gracefully.
+
 - **Prior Probabilities**: 
-   - The likelihood of a message being spam or non-spam before considering the words in the message.
+   - The prior probabilities represent the initial belief or the probability of a message being spam or non-spam before analyzing the actual content of the message. These probabilities are calculated based on the overall distribution of spam and non-spam messages in the dataset.
 
 - **Likelihoods**: 
-   - The probability of a word occurring in a message of a given class (spam or non-spam).
+   - The likelihood is the probability of a specific word occurring in a message given the class (spam or non-spam). For each word in the message, we calculate its likelihood under both classes (spam and non-spam). These likelihoods are crucial in determining whether a message is more likely to belong to one class or the other.
+
+- **Posterior Probabilities**: 
+   - The posterior probability is the probability of a message being spam or non-spam **given** the words in the message. It is calculated using Bayes' Theorem, which combines the prior probability and the likelihood of the words in the message.
+  
+   
+   - The posterior probability for each class is calculated, and the class with the higher posterior probability is assigned as the predicted label for the message. This step determines whether the message is classified as spam or non-spam based on the content of the message.
+
 
 ## Usage
 
